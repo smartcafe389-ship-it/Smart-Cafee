@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Café ☕</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1>Welcome to Smart Café ☕</h1>
+    <p>Experience warmth, flavor, and connection in every cup. Whether you're here to study, relax, or chat — Smart Café is your cozy home away from home.</p>
+    <button class="btn" onclick="openModal()">Login</button>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <h2>Why Choose Smart Café?</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <img src="assets/images/bean.png" alt="Fresh Beans">
+        <h3>Freshly Roasted Beans</h3>
+        <p>We brew every cup with 100% freshly roasted beans for an authentic and aromatic taste.</p>
+      </div>
+      <div class="feature">
+        <img src="assets/images/latte-art.png" alt="Latte Art">
+        <h3>Barista Crafted</h3>
+        <p>Each drink is hand-crafted by our skilled baristas to perfection and served with love.</p>
+      </div>
+      <div class="feature">
+        <img src="assets/images/relax.png" alt="Cozy Place">
+        <h3>Cozy & Relaxing Space</h3>
+        <p>Enjoy the perfect ambiance for studying, chatting, or simply taking a break.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU PREVIEW -->
+  <section class="menu-preview">
+    <h2>Customer Favorites</h2>
+    <div class="menu-items">
+      <div class="menu-item">
+        <img src="assets/images/cappuccino.jpg" alt="Cappuccino">
+        <h3>Cappuccino</h3>
+        <p>Rich espresso with creamy milk foam.</p>
+      </div>
+      <div class="menu-item">
+        <img src="assets/images/latte.jpg" alt="Latte">
+        <h3>Latte</h3>
+        <p>Smooth blend of espresso and steamed milk.</p>
+      </div>
+      <div class="menu-item">
+        <img src="assets/images/muffin.jpg" alt="Muffin">
+        <h3>Chocolate Muffin</h3>
+        <p>Sweet and soft, baked fresh every day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Login</h2>
+      <input id="username" placeholder="Username">
+      <input id="password" type="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+      <p id="msg" style="color:red;"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Smart Café — Where Every Cup Tells a Story ☕</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+</body>
+
+</html>

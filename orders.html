@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Orders - Smart Café</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <script src="js/nav.js"></script>
+    <script>loadNavbar("orders");</script>
+
+    <main class="main-content">
+        <h2>My Orders</h2>
+        <table id="ordersTable"></table>
+
+        <div style="margin-top:20px;">
+            <a href="menu.html" class="btn">☕ Continue Ordering</a>
+            <button class="btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Smart Café</p>
+    </footer>
+
+    <script>
+        const user = JSON.parse(localStorage.getItem("currentUser"));
+        if (!user || user.role !== "user") window.location = "index.html";
+
+        const table = document.getElementById("ordersTable");
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        function displayOrders() {
+            if (cart.length === 0) {
+                table.innerHTML = "<tr><td>No active orders. Add items from the menu.</td></tr>";
+                return;
+            }
+
+            let total = 0;
+            table.innerHTML = `
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Subtotal</th>
+          <th>Action</th>
+        </tr>
+        ${cart.map((c, i) => {
+                const sub = c.qty * c.price;
+                total += sub;
+                return `
+            <tr>
+              <td>${c.name}</td>
+              <td>${c.qty}</td>
+              <td>₱${c.price}</td>
+              <td>₱${sub}</td>
+              <td><button class="btn" onclick="removeItem(${i})">Remove</button></td>
+            </tr>`;
+            }).join("")}
+        <tr>
+          <td colspan="3" style="text-align:right"><strong>Total:</strong></td>
+          <td colspan="2"><strong>₱${total}</strong></td>
+        </tr>
+      `;
+        }
+
+        function removeItem(i) {
+            cart.splice(i, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            displayOrders();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            const history = JSON.parse(localStorage.getItem("history")) || [];
+            const timestamp = new Date().toLocaleString();
+            const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
+
+            const order = {
+                id: Date.now(),
+                user: user.username,
+                items: cart,
+                total: total,
+                date: timestamp
+            };
+
+            history.push(order);
+            localStorage.setItem("history", JSON.stringify(history));
+
+            localStorage.removeItem("cart");
+            cart = [];
+            displayOrders();
+
+            alert("✅ Checkout complete! Your order is now saved in history.");
+        }
+
+        displayOrders();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Order History - Smart Café</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <script src="js/nav.js"></script>
+    <script>loadNavbar("history");</script>
+
+    <main class="main-content">
+        <h2>Order History</h2>
+        <div id="historyContainer"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Smart Café</p>
+    </footer>
+
+    <script>
+        const user = JSON.parse(localStorage.getItem("currentUser"));
+        if (!user || user.role !== "user") window.location = "index.html";
+
+        const container = document.getElementById("historyContainer");
+        const allHistory = JSON.parse(localStorage.getItem("history")) || [];
+        const userHistory = allHistory.filter(h => h.user === user.username);
+
+        if (userHistory.length === 0) {
+            container.innerHTML = "<p>No previous orders found.</p>";
+        } else {
+            container.innerHTML = userHistory.map(order => `
+        <div class="menu-card" style="max-width:500px;margin:20px auto;text-align:left;">
+          <h3>Order #${order.id}</h3>
+          <p><strong>Date:</strong> ${order.date}</p>
+          <ul style="margin-left:20px;">
+            ${order.items.map(i => `<li>${i.qty} × ${i.name} (₱${i.price})</li>`).join("")}
+          </ul>
+          <p><strong>Total:</strong> ₱${order.total}</p>
+        </div>
+      `).join("");
+        }
+    </script>
+</body>
+
+</html>

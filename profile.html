@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Profile - Smart Café</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+  <script src="js/nav.js"></script>
+  <script>loadNavbar("profile");</script>
+
+  <main class="profile-section">
+    <div class="profile-card">
+      <div class="profile-avatar" id="avatar">?</div>
+      <h2>My Profile</h2>
+
+      <div class="profile-info-box" id="profileInfo"></div>
+
+      <div class="profile-actions">
+        <button onclick="editProfile()">Edit Profile</button>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Smart Café</p>
+  </footer>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    if (!user || user.role !== "user") {
+      window.location = "index.html";
+    } else {
+      const initials = user.username ? user.username.charAt(0).toUpperCase() : "?";
+      document.getElementById("avatar").textContent = initials;
+
+      document.getElementById("profileInfo").innerHTML = `
+        <div class="profile-row"><strong>Username:</strong> <span>${user.username}</span></div>
+        <div class="profile-row"><strong>Email:</strong> <span>${user.email}</span></div>
+        <div class="profile-row"><strong>Role:</strong> <span>${user.role}</span></div>
+      `;
+    }
+
+    function editProfile() {
+      alert("Profile editing coming soon!");
+    }
+
+    function logout() {
+      localStorage.removeItem("currentUser");
+      window.location = "index.html";
+    }
+  </script>
+</body>
+
+</html>

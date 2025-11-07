@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Smart Café</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>☕ Smart Café Admin</h1>
+        <p>Manage Menu & Users</p>
+    </header>
+
+    <main style="text-align:center;">
+        <h2 id="welcome"></h2>
+
+        <section>
+            <h3>🍰 Menu Management</h3>
+            <table id="menuTable"></table>
+            <p><button onclick="openAddModal()" class="btn">➕ Add New Item</button></p>
+        </section>
+
+        <section>
+            <h3>👥 Registered Users</h3>
+            <table id="usersTable"></table>
+        </section>
+
+        <hr style="width:60%;margin:25px auto;">
+        <button onclick="logout()" class="btn">Logout</button>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Smart Café</p>
+    </footer>
+
+    <!-- ADD / EDIT MODAL -->
+    <div id="menuModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Add Menu Item</h2>
+            <input id="menuName" placeholder="Item Name">
+            <input id="menuCategory" placeholder="Category">
+            <input id="menuPrice" type="number" placeholder="Price">
+            <input id="menuImage" placeholder="Image URL">
+            <textarea id="menuDesc" placeholder="Description"></textarea>
+            <button id="saveBtn" onclick="saveItem()" class="btn">Save</button>
+        </div>
+    </div>
+
+    <script src="js/admin_menu.js"></script>
+</body>
+
+</html>

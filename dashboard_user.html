@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard - Smart Café</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+  <script src="js/nav.js"></script>
+  <script>loadNavbar("home");</script>
+
+  <main class="main-content">
+    <h2 id="welcome"></h2>
+    <p>Welcome to Smart Café! Explore our delicious menu and track your orders.</p>
+    <a href="menu.html" class="btn">☕ Browse Menu</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Smart Café</p>
+  </footer>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    if (!user || user.role !== "user") window.location = "index.html";
+    else document.getElementById("welcome").textContent = `Hello, ${user.username}!`;
+  </script>
+</body>
+
+</html>
